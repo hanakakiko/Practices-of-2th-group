@@ -1,24 +1,17 @@
-package Hash_git;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+package HashGit;
+import java.io.*;
 import java.security.MessageDigest;
 
 public class SHA1CheckSum {
     private byte[] sha1;
     private String outFile;
+    
+    //¸ù¾ÝÎÄ¼þÉú³É¹þÏ£Öµ
     public SHA1CheckSum(File inFile) throws Exception{
         FileInputStream input = new FileInputStream(inFile);
         this.sha1 = Sha1Checksum(input);
     }
-
-    public SHA1CheckSum(String content)throws Exception{
-        this.sha1 = Sha1Checksum(content);
-    }
-
-
-
+    //
     public static byte[] Sha1Checksum(InputStream is) throws Exception{
         byte[] buffer = new byte[1024];
         MessageDigest complete = MessageDigest.getInstance("SHA-1");
@@ -32,14 +25,17 @@ public class SHA1CheckSum {
         is.close();
         return complete.digest();
     }
-
-    public static byte[] Sha1Checksum(String content) throws Exception{
+    
+    //¸ù¾Ý×Ö·û´®Éú³É¹þÏ£Öµ
+    public SHA1CheckSum(String value)throws Exception{
+        this.sha1 = Sha1Checksum(value);
+    }
+    //
+    public static byte[] Sha1Checksum(String value) throws Exception{
         MessageDigest complete = MessageDigest.getInstance("SHA-1");
-        complete.update(content.getBytes());
+        complete.update(value.getBytes());
         return complete.digest();
     }
-
-
 
     public String getSha1(){
         outFile = "";
@@ -47,7 +43,7 @@ public class SHA1CheckSum {
         for(int i = 0;i< n;i++) {
             String append = Integer.toString(sha1[i] & 0xFF, 16);
             if (append.length()<2) {
-                outFile = outFile + "0" + append; // å¦‚æžœä¸æ»¡2ä½å­—ç¬¦ï¼Œåˆ™å°†å…¶å‰é¢è¡¥ä¸€ä¸ª"0"
+                outFile = outFile + "0" + append; 
             }
             else {
                 outFile += append;
