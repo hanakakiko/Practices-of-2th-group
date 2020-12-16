@@ -13,9 +13,12 @@ public class Blob extends GitObject {
     		if(temp=="") break;
     		value+=temp;
     	}
-    	input.close();
     	
     	//根据value生成对应的key
         genKey();
     }
+
+	public void write() throws Exception {
+		writeFile();
+	}
 }
