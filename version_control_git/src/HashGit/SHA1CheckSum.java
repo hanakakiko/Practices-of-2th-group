@@ -2,6 +2,7 @@ package HashGit;
 import java.io.*;
 import java.security.MessageDigest;
 
+
 public class SHA1CheckSum {
     private byte[] sha1;
     private String outFile;
