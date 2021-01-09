@@ -1,38 +1,26 @@
 package HashGit;
 
-import java.io.File;
-import java.io.PrintWriter;
-import java.util.Scanner;
-
 public class Commit extends GitObject {
-    private String tree;
-    private String parent;
-    private String author;
-    private String committer;
-    private String comment;
-
-    public Commit(String author, String committer, String comment) throws Exception{
-        Scanner scanner = new Scanner(new File(this.path + "HEAD")); // check out where head points because commit will update on the basis of the branch it is on
-        String branch =  this.path + scanner.next();  // get branch address such as ref/heads/master
-        scanner = new Scanner(new File(branch)); // read last commit hash code from the branch file
-        if(scanner.hasNext()) this.parent = scanner.next();
-        else this.parent = ""; // the parent of the first commit is empty
-        scanner.close(); // don't forget to close
-        System.out.println("parent is " + this.parent); // print it to verify the result
-
-        this.tree = new Tree(new File(path)).getKey(); // compute the hash code of root directory
-        this.author = author;
-        this.committer = committer;
-        this.comment = comment;
-
-        this.value = "tree " + this.tree + "\nparent" + this.parent + "\nauthor " + this.author + "\ncommitter " + this.committer + "\n\n" + this.comment;
-        genKey(); // generate new hash code based on the content
-        System.out.println("now the hashcode is "+ this.key);
-        PrintWriter printWriter = new PrintWriter(branch);
-        System.out.println("write key " + " to " + branch); // update the content of refs/head/<branchName>
-        printWriter.print(this.key);
-        printWriter.close();
-
-        this.path += "objects/"; // prepare the path to the method write
+	//构造函数
+    public Commit(Commit lastCommit,Tree tree) throws Exception {
+    	genValue(lastCommit,tree);
+    	genKey();
+    	writeFile();
+    }
+    
+    //第一次commit的构造函数
+    public Commit(Tree tree)throws Exception{
+    	genValue(tree);
+    	genKey();
+    	writeFile();
+    }
+    
+    public void genValue(Commit lastCommit,Tree tree) {
+    	this.value+="tree"+" "+tree.getKey()+"\n";
+    	this.value+="last commit"+" "+lastCommit.getKey()+"\n";
+    }
+    
+    public void genValue(Tree tree) {
+    	this.value+="tree"+" "+tree.getKey()+"\n";
     }
 }
