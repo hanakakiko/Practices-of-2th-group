@@ -1,11 +1,13 @@
 package HashGit;
 
 public class Commit extends GitObject {
+
 	//构造函数
     public Commit(Commit lastCommit,Tree tree) throws Exception {
     	genValue(lastCommit,tree);
     	genKey();
     	writeFile();
+    	writeLog(); 
     }
     
     //第一次commit的构造函数
@@ -13,6 +15,7 @@ public class Commit extends GitObject {
     	genValue(tree);
     	genKey();
     	writeFile();
+    	writeLog();
     }
     
     public void genValue(Commit lastCommit,Tree tree) {
@@ -22,5 +25,9 @@ public class Commit extends GitObject {
     
     public void genValue(Tree tree) {
     	this.value+="tree"+" "+tree.getKey()+"\n";
+    }
+    
+    public void writeLog() {
+    	
     }
 }

@@ -1,22 +1,23 @@
 package HashGit;
 
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.MessageDigest;
-import java.util.Scanner;
 
 //KeyValueStore类，用于实现key-value的存储
 public class KeyValueStore {
 	public static String objectPath=""; //用于存放object文件存储路径
 	
 	//设置object存放路径
-	public static void setPath(String path) {
-	    objectPath=path;	
-	}
+	//public static void setPath(String path) {
+	  //  objectPath=path;	
+	//}
 	
 	//根据Blob对象对应的文件内容生成key值
     public static String genKey(File inFile) throws Exception{
@@ -71,14 +72,14 @@ public class KeyValueStore {
     //根据key值找到对应的value
     public static String searchValue(String key)throws IOException {
     	String value="";
-    	Scanner input=new Scanner(new File(KeyValueStore.objectPath+"/"+key));
+    	/*Scanner input=new Scanner(new File(KeyValueStore.objectPath+"/"+key));
     	while(true) {
     		String temp=input.nextLine();
     		if(temp=="") break;
     		value+=temp;
     	}
-    	input.close();
-    	/*try (DataInputStream input=
+    	input.close();*/
+    	try (DataInputStream input=
     			new DataInputStream(new FileInputStream(KeyValueStore.objectPath+"/"+key))){
     		while(true){
     			value+=input.readUTF();
@@ -89,7 +90,7 @@ public class KeyValueStore {
     	}
     	catch(IOException e2) {
     		e2.printStackTrace();
-    	}*/
+    	}
     	return value;
     }
 }

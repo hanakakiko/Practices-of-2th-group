@@ -1,7 +1,7 @@
 package HashGit;
 
 //版本管理工具Object类
-public class GitObject {
+public abstract class GitObject {
     protected String key="";
     protected String value="";
     //protected File file;
