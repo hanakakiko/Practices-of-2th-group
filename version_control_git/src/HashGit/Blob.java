@@ -26,7 +26,7 @@ public class Blob extends GitObject {
     	File file=new File(path);
     	genValue(file);
     }
-    
+    //
     public void genValue(File file)throws Exception{
     	//根据文件内容生成value
     	Scanner input=new Scanner(file);
@@ -35,6 +35,6 @@ public class Blob extends GitObject {
     		if(temp=="") break;
     		value+=temp;
     	}
-    	input.close();
+    	//input.close();
     }
 }
