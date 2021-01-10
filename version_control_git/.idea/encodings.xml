@@ -2,8 +2,10 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/HashGit/Blob.java" charset="GBK" />
-    <file url="file://$PROJECT_DIR$/src/HashGit/Blob.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/HashGit/Command.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/HashGit/Commit.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/HashGit/GitObject.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/src/HashGit/Repository.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/HashGit/SHA1CheckSum.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/src/HashGit/Tree.java" charset="GBK" />
   </component>
