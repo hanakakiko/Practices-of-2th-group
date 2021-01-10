@@ -14,12 +14,6 @@ import java.security.MessageDigest;
 public class KeyValueStore {
 	public static String objectPath=""; //用于存放object文件存储路径
 	
-	//设置object存放路径
-	//public static void setPath(String path) {
-	  //  objectPath=path;	
-	//}
-	
-	//根据Blob对象对应的文件内容生成key值
     public static String genKey(File inFile) throws Exception{
         FileInputStream input = new FileInputStream(inFile);
         byte[] sha1 = Sha1Checksum(input);
@@ -72,13 +66,6 @@ public class KeyValueStore {
     //根据key值找到对应的value
     public static String searchValue(String key)throws IOException {
     	String value="";
-    	/*Scanner input=new Scanner(new File(KeyValueStore.objectPath+"/"+key));
-    	while(true) {
-    		String temp=input.nextLine();
-    		if(temp=="") break;
-    		value+=temp;
-    	}
-    	input.close();*/
     	try (DataInputStream input=
     			new DataInputStream(new FileInputStream(KeyValueStore.objectPath+"/"+key))){
     		while(true){

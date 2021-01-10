@@ -6,25 +6,34 @@ import java.io.PrintWriter;
 
 //用于存放当前分支文件
 public class Head {
-    private String path;  //用于记录head指向分支的文件路径
-    //无参构造函数
-    public Head() {}
+    private static String headPath="";  //用于记录head指向分支的文件路径
+    private Branch currentBranch;
+    private File head;
+    
+    //设置head文件存放路径
+    public static void setHeadPath(String givenHeadPath) {
+    	headPath=givenHeadPath;
+    }
     
     //构造函数
-    public Head(String branchPath,String headPath,String branchName) throws IOException {
-    	this.path=branchPath+"/"+branchName;
-    	writeHead(headPath);
+    public Head(Branch currentBranch) throws IOException {
+        File head=new File(headPath+"\\"+"HEAD");
+    	this.currentBranch=currentBranch;
+    	//写入文件
+    	PrintWriter pw=new PrintWriter(head);
+    	pw.println(this.currentBranch.getBranchName());
+    	pw.close();
     }
     
-    public void setHead(String branchPath,String headPath,String branchName) throws IOException {
-    	this.path=branchPath+"/"+branchName;
-    	//更改本地文件
-    	writeHead(headPath);
+    public void setHead(Branch currentBranch) throws IOException {
+    	this.currentBranch=currentBranch;
+    	//写入文件
+    	PrintWriter pw=new PrintWriter(head);
+    	pw.println(this.currentBranch.getBranchName());
+    	pw.close();
     }
     
-    //写入本地文件
-    public void writeHead(String headPath) throws IOException {
-		PrintWriter output=new PrintWriter(new File(headPath)); 
-    	output.println(this.path);
+    public Branch getBranch() {
+    	return this.currentBranch;
     }
 }
