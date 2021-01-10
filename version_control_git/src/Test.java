@@ -11,11 +11,16 @@ public class Test {
 
     private static String path;
     private static String content1;
-    public static void creatTest() throws FileNotFoundException {
+    public static void creatTest() {
         File folder = new File(path);
         folder.mkdir();
-        String content1="test1";
-        PrintWriter printWriter = new PrintWriter(path+"1.txt");
+        content1="test1";
+        PrintWriter printWriter = null;
+        try {
+            printWriter = new PrintWriter(path+"1.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         printWriter.print(content1);//在本项目所在路径下创建一个test文件夹，里面创建一个内容为“test1”的1.txt文件
     }
 
@@ -25,10 +30,26 @@ public class Test {
     };
 
     public static void testBlob() throws Exception {
-        Blob a=new Blob(path+"1.txt");//用1.txt的路径构造blob对象
+        try {
+            Blob a = new Blob(new File(path + "1.txt"));//用1.txt的路径构造blob对象
+            a.genValue(path);
+            a.genValue(path);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
     }
+    /*
+    public static void testBranch(String master){
+        try{
 
-   public static void main(String[] args){
+        }catch (Exception e){
+
+        }
+    }
+     */
+
+    public static void main(String[] args){
         try {
             String path = "./test";//在当前项目里产生一个test目录用来存放测试产生的文件
             creatTest();
@@ -43,5 +64,5 @@ public class Test {
         }
         //testWorkingDir();
 
-   }
+    }
 }
