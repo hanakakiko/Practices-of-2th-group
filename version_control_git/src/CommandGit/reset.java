@@ -15,6 +15,10 @@ public class reset {
     private File index;
     private Head head;
 
+    public void sReset()throws IOException {
+
+    }
+
     public void mReset()throws IOException {
         this.head.getBranch().mixedReset();
     }
