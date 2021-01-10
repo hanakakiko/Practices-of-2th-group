@@ -69,24 +69,7 @@ public class Branch {
     	pw.close();
     }
     
-    //soft回滚，使得branch当前所指分支为上一次commit
-    public void softReset() throws FileNotFoundException {
-    	File currentCommitFile=new File(GitObject.getObjectPath()+"\\"+this.currentCommitKey);
-    	if(!currentCommitFile.exists()) {
-    		System.out.println("回滚失败！");
-    		return;
-    	}
-    	Scanner input=new Scanner(currentCommitFile);
-    	String firstLine=input.nextLine();
-    	String[] parent=firstLine.split(" ");
-    	if(!parent[0].equals("parent")) {
-    		System.out.println("该提交已经是第一次提交，不可回滚！");
-    		input.close();
-    		return;
-    	}
-        this.modifyCommitKey(parent[1]);
-        input.close();
-    }
+
     
     //mixed回滚,不仅更改branch指向，还更改index内容
     public void mixedReset()throws IOException{
