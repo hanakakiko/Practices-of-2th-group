@@ -114,3 +114,6 @@ reset命令可分为soft、mixed、hard三种，后两者分别将暂存区、�
 ### 2021-1-10
 对代码内容进一步进行了优化，取消了firstCommit（生成初次commit）等不必要的功能，同时增加了暂存区，优化了add及生成新commit的功能
 上次添加Commit、Head、Branch类忘修改readme的内容介绍部分，现在补上
+
+### 2021-1-10
+优化了command命令行，使用了apache.commons.cli。 使用命令行的方法： 1.在ij里编译整个文件夹，生成out文件夹 2.将out文件夹和cli.jar的绝对地址路径添加到环境变量的CLASSPATH中 3.使用命令行，输入命令，例如java Commandgit init,其中Commandgit是一个无包类
